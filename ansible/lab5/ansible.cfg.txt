@@ -1,0 +1,3 @@
+[defaults]
+remote_user= nada
+private_key_file = ./id_rsa.pem
