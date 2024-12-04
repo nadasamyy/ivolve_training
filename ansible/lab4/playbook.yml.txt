@@ -1,7 +1,0 @@
-- name: Deploying applications using roles
-  hosts: all
-  become: yes
-  roles:
-    - jenkins
-    - docker
-    - oc   
