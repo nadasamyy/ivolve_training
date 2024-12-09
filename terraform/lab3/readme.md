@@ -250,5 +250,69 @@ resource "aws_s3_bucket" "logs" {
     Name = "Lab19-Flow-Logs"
   }
 }
+# **Using create_before_destroy Lifecycle Rule on EC2**
+
+In Terraform, the `create_before_destroy` lifecycle rule ensures that a new resource is created before the existing one is destroyed. This is particularly useful for resources like EC2 instances to avoid downtime during updates or replacements.
+
+---
+
+## **How to Apply create_before_destroy to an EC2 Instance**
+
+### Terraform Code Example:
+
+```hcl
+resource "aws_instance" "example" {
+  # ... other configuration ...
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
 ```
+
+### **How it Works:**
+
+1. **Plan:** When you run `terraform plan`, Terraform will detect changes to the EC2 instance configuration.
+2. **Apply:** When you run `terraform apply`, Terraform will:
+   - Create a new EC2 instance with the updated configuration.
+   - Wait for the new instance to become running.
+   - Detach the Elastic IP address (if any) from the old instance.
+   - Terminate the old instance.
+
+---
+
+## **Comparing Lifecycle Rules**
+
+Terraform offers several lifecycle rules to control resource behavior during updates and deletions:
+
+### 1. **create_before_destroy:**
+   - Ensures that a new resource is created before the existing one is destroyed.
+   - Ideal for resources that require minimal downtime during updates.
+
+### 2. **prevent_destroy:**
+   - Prevents Terraform from destroying the resource, even if the configuration changes.
+   - Useful for resources that should not be accidentally deleted.
+
+### 3. **ignore_changes:**
+   - Instructs Terraform to ignore changes to specific attributes of a resource.
+   - Can be used to avoid unnecessary re-creation of resources.
+
+---
+
+## **Choosing the Right Lifecycle Rule**
+
+The choice of lifecycle rule depends on your specific use case and desired behavior. Consider the following factors:
+
+- **Downtime Tolerance:**
+  - If your application can tolerate some downtime during updates, `create_before_destroy` is a good choice.
+
+- **Resource Criticality:**
+  - For critical resources that must remain available, `prevent_destroy` can be used to protect them from accidental deletion.
+
+- **Configuration Changes:**
+  - If you have specific attributes that you want Terraform to ignore, `ignore_changes` can be helpful.
+
+By understanding these lifecycle rules and their appropriate use cases, you can effectively manage resource updates and deletions in your Terraform configurations.
+
+
 
