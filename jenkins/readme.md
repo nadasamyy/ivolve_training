@@ -1,4 +1,4 @@
-# **Lab 24: Jenkins Shared Libraries**
+# **Lab 3: Jenkins Shared Libraries**
 
 ## **Objective**
 
