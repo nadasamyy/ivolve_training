@@ -1,0 +1,18 @@
+@Library('jenkins-shared-library') _  // The name you gave the library
+
+pipeline {
+    agent any
+    stages {
+        stage('Test Shared Library') {
+            steps {
+                script {
+                    // Call a method from vars/
+                    myPipeline('Jenkins')
+
+                    // Call a class from src/
+                    org.example.UtilityClass.printMessage('Shared Library Working!')
+                }
+            }
+        }
+    }
+}
