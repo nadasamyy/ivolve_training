@@ -1,4 +1,4 @@
-@Library('jenkins-shared-library') _  // The name you gave the library
+@Library('jenkins-shared-library') _  // Load the shared library
 
 pipeline {
     agent any
@@ -6,11 +6,10 @@ pipeline {
         stage('Test Shared Library') {
             steps {
                 script {
-                    // Call a method from vars/
-                    myPipeline('Jenkins')
-
-                    // Call a class from src/
-                    org.example.UtilityClass.printMessage('Shared Library Working!')
+                    // Call the method from the shared library
+                    def message = org.example.UtilityClass.printMessage('Shared Library Working!')
+                    // Use echo to print the message in the Jenkins log
+                    echo message
                 }
             }
         }
