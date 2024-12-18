@@ -1,14 +1,14 @@
-# **Lab 30: Kubernetes Security and RBAC**
+# **Lab 30: OpenShift Security and RBAC**
 
 ## **Prerequisites**
 
-### **1. Access to a Kubernetes Cluster**
-Ensure you have access to a functional Kubernetes cluster and the `kubectl` CLI installed and configured.
+### **1. Access to an OpenShift Cluster**
+Ensure you have access to a functional OpenShift cluster and the `oc` CLI installed and configured.
 
 ### **2. Verify Cluster Access**
 Confirm that you can communicate with the cluster:
 ```bash
-kubectl cluster-info
+oc whoami
 ```
 
 ### **3. Familiarity with Kubernetes RBAC Concepts**
@@ -23,12 +23,12 @@ Create a Service Account named `pod-reader-sa` in your current namespace:
 
 #### **Command:**
 ```bash
-kubectl create serviceaccount pod-reader-sa
+oc create serviceaccount pod-reader-sa
 ```
 
 #### **Verify the Service Account:**
 ```bash
-kubectl get serviceaccounts
+oc get serviceaccounts
 ```
 
 ---
@@ -50,12 +50,12 @@ rules:
 
 #### **Apply the Role:**
 ```bash
-kubectl apply -f pod-reader-role.yaml
+oc apply -f pod-reader-role.yaml
 ```
 
 #### **Verify the Role:**
 ```bash
-kubectl get roles
+oc get roles
 ```
 
 ---
@@ -81,12 +81,12 @@ roleRef:
 
 #### **Apply the RoleBinding:**
 ```bash
-kubectl apply -f pod-reader-rolebinding.yaml
+oc apply -f pod-reader-rolebinding.yaml
 ```
 
 #### **Verify the RoleBinding:**
 ```bash
-kubectl get rolebindings
+oc get rolebindings
 ```
 
 ---
@@ -97,12 +97,12 @@ Retrieve the token for the Service Account to authenticate API requests:
 #### **Commands:**
 1. Find the secret associated with the Service Account:
    ```bash
-   kubectl get secrets | grep pod-reader-sa
+   oc get secrets | grep pod-reader-sa
    ```
 
 2. Describe the secret to view the token:
    ```bash
-   kubectl describe secret <secret-name>
+   oc describe secret <secret-name>
    ```
 
 3. Use the token to authenticate:
@@ -135,9 +135,9 @@ Remove all created resources after completing the tasks:
 
 #### **Commands:**
 ```bash
-kubectl delete serviceaccount pod-reader-sa
-kubectl delete role pod-reader
-kubectl delete rolebinding pod-reader-binding
+oc delete serviceaccount pod-reader-sa
+oc delete role pod-reader
+oc delete rolebinding pod-reader-binding
 ```
 
 ---
