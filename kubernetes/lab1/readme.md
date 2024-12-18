@@ -48,8 +48,6 @@ kubectl get deployments
 kubectl get pods
 ```
 
-#### **Sample Output:**
-![Deployment and Pods Output](https://via.placeholder.com/600x200?text=Deployment+and+Pods+Output)
 
 ---
 
@@ -64,8 +62,6 @@ Check the service:
 kubectl get svc
 ```
 
-#### **Sample Output:**
-![Service Output](https://via.placeholder.com/600x200?text=Service+Output)
 
 Forward a local port to access the service:
 ```bash
@@ -104,8 +100,6 @@ Check the rollout history to confirm the update was recorded:
 kubectl rollout history deployment/nginx
 ```
 
-#### **Sample Output:**
-![Rollout History](https://via.placeholder.com/600x200?text=Rollout+History)
 
 ---
 
